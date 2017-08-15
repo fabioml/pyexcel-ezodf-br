@@ -16,9 +16,11 @@ EzODF.py maintained by pyexcel
 Maintenance
 =============
 
-Since `T0ha/ezodf <https://github.com/T0ha/ezodf/>` was not updated for too long, **pyexcel**
+Since `T0ha/ezodf <https://github.com/T0ha/ezodf/>`_ was not updated for too long, **pyexcel**
 tries to cover up the **holiday** period until @T0ha will come back to continue. **pyexcel**
 is happy to push the changes if requested.
+
+If you are a developer and are interested in this project, please apply for co-maintenanceship.
 
 
 Abstract

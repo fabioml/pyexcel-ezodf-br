@@ -8,3 +8,4 @@ configuration:
 targets:
   - README.rst: README.rst
   - setup.py: setup.py
+  - ezodf/_version.py: version.py.jj2

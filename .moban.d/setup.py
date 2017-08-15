@@ -15,6 +15,9 @@
 #
 {% endblock %}
 
+{%block platform_block%}
+{%endblock%}
+
 {%block morefiles%}'CONTRIBUTORS.rst'{%endblock%}
 
 {%block additional_classifiers %}

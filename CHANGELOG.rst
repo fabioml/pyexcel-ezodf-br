@@ -2,6 +2,17 @@
 NEWS
 ====
 
+Version 0.3.3 - unreleased
+
+  * `issue 1 <https://github.com/pyexcel/pyexcel-ezodf/issues/1>`_,
+	stream alike object(except StringIO) cannot be handled
+  * `PR 18 <https://github.com/T0ha/ezodf/pull/18>`_,
+	Use cStringIO as default but keep StringIO as optional
+
+Version 0.3.2 - December 2015
+
+  * Support wheels and python3
+
 Version 0.3.1 - December 2015
 
   * File-like objects utilisation improved
