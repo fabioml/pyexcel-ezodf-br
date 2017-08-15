@@ -29,6 +29,8 @@ MIMETYPES = {
     'otf': "application/vnd.oasis.opendocument.formula-template",
     'odm': "application/vnd.oasis.opendocument.text-master",
     'oth': "application/vnd.oasis.opendocument.text-web",
+    'fodt': "application/xml",
+    'fods': "application/xml"
 }
 
 FILE_EXT_FOR_MIMETYPE = dict([(mimetype, ext) for ext, mimetype in MIMETYPES.items()])
