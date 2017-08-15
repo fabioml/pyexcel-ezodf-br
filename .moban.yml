@@ -9,3 +9,4 @@ targets:
   - README.rst: README.rst
   - setup.py: setup.py
   - ezodf/_version.py: version.py.jj2
+  - "tests/requirements.txt": "test_requirements.txt"

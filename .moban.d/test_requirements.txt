@@ -1,0 +1,5 @@
+{% extends 'tests/requirements.txt.jj2' %}
+{%block extras %}
+unittest2
+testtools
+{%endblock%}
