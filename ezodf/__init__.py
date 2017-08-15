@@ -20,7 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import unicode_literals, print_function, division
 
-from _version import __version__
+from ._version import __version__
 __author__ = "mozman <mozman@gmx.at>"
 
 from .document import opendoc, newdoc
