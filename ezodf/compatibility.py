@@ -11,6 +11,11 @@ import sys, zipfile
 
 PY3 = sys.version_info[0] > 2
 
+
+def is_stream(instance):
+    return hasattr(instance, 'read')
+
+
 if PY3:
     # distiguish StringIO
     from io import BytesIO as StringIO
@@ -35,8 +40,6 @@ if PY3:
     def bytes2unicode(bytes):
         return str(bytes, 'utf-8')
 
-    def is_stream(instance):
-        return  isinstance(instance, StringIO)
 
 else: # PY2
     # distiguish StringIO
@@ -77,8 +80,3 @@ else: # PY2
                 f.write(data.getvalue())
                 f.flush()
                 return zipfile.is_zipfile(tmp)
-
-    def is_stream(instance):
-        return (isinstance(instance, InputType) or
-                isinstance(instance, OutputType) or
-                isinstance(instance, SlowStringIO))

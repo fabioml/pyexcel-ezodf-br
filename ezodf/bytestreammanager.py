@@ -15,7 +15,7 @@ from .filemanager import FileManager
 class ByteStreamManager(FileManager):
     def __init__(self, buffer=None):
         if is_stream(buffer):
-            self._zipfile_as_bytes = buffer.getvalue()
+            self._zipfile_as_bytes = buffer.read()
         else:
             self._zipfile_as_bytes = buffer
         super(ByteStreamManager, self).__init__()
