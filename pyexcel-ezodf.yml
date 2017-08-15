@@ -1,0 +1,20 @@
+overrides: "pyexcel.yaml"
+author: Manfred Moitzi
+contact: 'mozman@gmx.at'
+maintainer: 'C. W.'
+maintainer_contact: 'wangc_2011@hotmail.com'
+name: "pyexcel-ezodf"
+nick_name: ezodf
+version: 0.3.3
+current_version: 0.3.3
+release: 0.3.2
+license: MIT
+dependencies:
+  - lxml
+  - weakrefset;python_version<"2.7"
+keywords:
+  - ODF
+  - OpenDocumentFormat
+  - OpenOffice LibreOffice
+description: |
+  A Python package to create/manipulate OpenDocumentFormat files

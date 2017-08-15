@@ -1,17 +1,7 @@
 EzODF.py maintained by pyexcel
 ----------------------------------
 
-.. image:: https://raw.githubusercontent.com/pyexcel/pyexcel.github.io/master/images/patreon.png
-   :target: https://www.patreon.com/pyexcel
-
-.. image:: https://api.travis-ci.org/pyexcel/pyexcel-ezodf.svg?branch=master
-   :target: http://travis-ci.org/pyexcel/pyexcel-ezodf
-
-.. image:: https://codecov.io/gh/pyexcel/pyexcel-ezodf/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/pyexcel/pyexcel-ezodf
-
-.. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
-   :target: https://gitter.im/pyexcel/Lobby
+{% include "badges.rst.jj2" %}
 
 Maintenance
 =============
@@ -70,20 +60,7 @@ CPython 2.6 is in progress.
 Installation
 ============
 
-You can install it via pip:
-
-.. code-block:: bash
-
-    $ pip install pyexcel-ezodf
-
-
-or clone it and install it:
-
-.. code-block:: bash
-
-    $ git clone https://github.com/pyexcel/pyexcel-ezodf.git
-    $ cd pyexcel-ezodf
-    $ python setup.py install
+{% include "installation.rst.jj2" %}
 
 Documentation
 =============
