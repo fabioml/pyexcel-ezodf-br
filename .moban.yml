@@ -10,3 +10,4 @@ targets:
   - setup.py: setup.py
   - ezodf/_version.py: version.py.jj2
   - "tests/requirements.txt": "test_requirements.txt"
+  - requirements.txt: requirements.txt
