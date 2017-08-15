@@ -18,7 +18,7 @@
 {%block platform_block%}
 {%endblock%}
 
-{%block morefiles%}'CONTRIBUTORS.rst'{%endblock%}
+{%block morefiles%}'CONTRIBUTORS.rst',{%endblock%}
 
 {%block additional_classifiers %}
           "License :: OSI Approved :: MIT License",
