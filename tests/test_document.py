@@ -32,9 +32,11 @@ def get_zip_names(zipname):
     z.close()
     return names
 
+
 def remove(filename):
     """ Delete `filename`. """
     os.remove(filename)
+
 
 class TestDocumentCopy(unittest.TestCase):
     def open_and_saveas(self, filename, msg=""):
@@ -50,6 +52,20 @@ class TestDocumentCopy(unittest.TestCase):
     def test_open_and_saveas_all(self):
         for filename in ['empty.odt', 'empty.ods', 'empty.odg', 'empty.odp']:
             self.open_and_saveas(filename, "open and saveas faild on '%s'" % filename)
+
+
+class TestFlatDocumentCopy(unittest.TestCase):
+    def open_and_saveas(self, filename, msg=""):
+        infile = getdatafile(filename)
+        outfile = getdatafile('new.'+filename)
+        odt = document.opendoc(infile)
+        odt.saveas(outfile)
+        remove(outfile)
+
+    def test_open_and_saveas_all(self):
+        for filename in ['variables.fodt', 'ods_formats.fods']:
+            self.open_and_saveas(filename, "open and saveas faild on '%s'" % filename)
+
 
 FAKESTYLE = """<style:style style:name="Standard" style:family="paragraph"
 style:class="text"/>"""
@@ -124,6 +140,7 @@ class TestNewDocument(unittest.TestCase):
         self.assertTrue(os.path.exists(docname))
         self.assertTrue(check_zipfile_for_oasis_validity(docname, b"application/vnd.oasis.opendocument.graphics"))
         remove(docname)
+
 
 class TestOdsInMemory(unittest.TestCase):
     stream_class_or_callable = StringIO
