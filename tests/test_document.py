@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding:utf-8
+# coding:utf-8
 # Purpose: test document module
 # Created: 30.12.2010
 # Copyright (C) 2010, Manfred Moitzi
@@ -24,6 +24,7 @@ from ezodf.filemanager import check_zipfile_for_oasis_validity
 # objects to test
 from ezodf import document, const
 from ezodf.compatibility import StringIO, PY3
+from nose.tools import raises
 
 
 def get_zip_names(zipname):
@@ -52,6 +53,14 @@ class TestDocumentCopy(unittest.TestCase):
     def test_open_and_saveas_all(self):
         for filename in ['empty.odt', 'empty.ods', 'empty.odg', 'empty.odp']:
             self.open_and_saveas(filename, "open and saveas faild on '%s'" % filename)
+
+
+class TestMalformedFODS(unittest.TestCase):
+
+    @raises(IOError)
+    def test_faked_fods(self):
+        infile = getdatafile('fake.fods')
+        document.opendoc(infile)
 
 
 class TestFlatDocumentCopy(unittest.TestCase):
