@@ -30,7 +30,7 @@ DESCRIPTION = (
     ''
 )
 URL = 'https://github.com/pyexcel/pyexcel-ezodf'
-DOWNLOAD_URL = '%s/archive/0.3.2.tar.gz' % URL
+DOWNLOAD_URL = '%s/archive/0.3.3.tar.gz' % URL
 FILES = ['README.rst', 'CONTRIBUTORS.rst', 'CHANGELOG.rst']
 KEYWORDS = [
     'ODF',
