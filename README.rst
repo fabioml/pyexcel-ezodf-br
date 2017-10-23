@@ -72,7 +72,8 @@ CPython 2.6 is in progress.
 Installation
 ============
 
-You can install it via pip:
+
+You can install pyexcel-ezodf via pip:
 
 .. code-block:: bash
 

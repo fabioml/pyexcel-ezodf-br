@@ -5,9 +5,9 @@ maintainer: 'C. W.'
 maintainer_contact: 'wangc_2011@hotmail.com'
 name: "pyexcel-ezodf"
 nick_name: ezodf
-version: 0.3.3
-current_version: 0.3.3
-release: 0.3.3
+version: 0.3.4
+current_version: 0.3.4
+release: 0.3.4
 license: MIT
 include_doctest: false
 nodocs: true

@@ -2,6 +2,10 @@
 NEWS
 ====
 
+Version 0.3.4 - 23 October 2017
+
+  * added CONTRIBUTORS.rst into tar ball
+
 Version 0.3.3 - 17 Auguest 2017
 
 Package name is now changed to pyexcel-ezodf but you do not need to
