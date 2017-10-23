@@ -20,7 +20,7 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'pyexcel-ezodf'
 AUTHOR = 'Manfred Moitzi'
-VERSION = '0.3.3'
+VERSION = '0.3.4'
 EMAIL = 'mozman@gmx.at'
 LICENSE = 'MIT'
 DESCRIPTION = (
@@ -28,7 +28,7 @@ DESCRIPTION = (
     ''
 )
 URL = 'https://github.com/pyexcel/pyexcel-ezodf'
-DOWNLOAD_URL = '%s/archive/0.3.3.tar.gz' % URL
+DOWNLOAD_URL = '%s/archive/0.3.4.tar.gz' % URL
 FILES = ['README.rst', 'CONTRIBUTORS.rst', 'CHANGELOG.rst']
 KEYWORDS = [
     'ODF',
@@ -68,8 +68,8 @@ EXTRAS_REQUIRE = {
 # You do not need to read beyond this line
 PUBLISH_COMMAND = '{0} setup.py sdist bdist_wheel upload -r pypi'.format(
     sys.executable)
-GS_COMMAND = ('gs pyexcel-ezodf v0.3.3 ' +
-              "Find 0.3.3 in changelog for more details")
+GS_COMMAND = ('gs pyexcel-ezodf v0.3.4 ' +
+              "Find 0.3.4 in changelog for more details")
 NO_GS_MESSAGE = ('Automatic github release is disabled. ' +
                  'Please install gease to enable it.')
 HERE = os.path.abspath(os.path.dirname(__file__))
