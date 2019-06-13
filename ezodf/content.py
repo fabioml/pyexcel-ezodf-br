@@ -13,6 +13,7 @@ from .base import GenericWrapper
 
 from . import body # register body classes
 
+
 class OfficeDocumentContent(XMLMixin):
     TAG = CN('office:document-content')
 
@@ -38,4 +39,3 @@ class OfficeDocumentContent(XMLMixin):
         # The office:body element is just frame element for the real document content:
         # office:text, office:spreadsheet, office:presentation, office:drawing
         return wrap(subelement(self.body.xmlnode, bodytag))
-

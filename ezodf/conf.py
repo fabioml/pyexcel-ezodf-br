@@ -10,6 +10,7 @@ __author__ = "mozman <mozman@gmx.at>"
 
 from .const import DEFAULT_MAXCOUNT, DEFAULT_TABLE_EXPAND_STRATEGY
 
+
 class TableExpandStrategyConfig(object):
     def __init__(self):
         self.reset()
@@ -58,6 +59,7 @@ class Config(object):
 
         """
         self.table_expand_strategy.reset()
+
 
 # the real global configuration object
 config = Config()

@@ -10,6 +10,7 @@ __author__ = "mozman <mozman@gmx.at>"
 from .xmlns import CN, register_class
 from .base import GenericWrapper
 
+
 @register_class
 class DrawingPage(GenericWrapper):
     TAG = CN('draw:page')
@@ -26,6 +27,7 @@ class DrawingPage(GenericWrapper):
     @property
     def name(self):
         return self.get_attr(CN('draw:name'))
+
     @name.setter
     def name(self, name):
         self.set_attr(CN('draw:name'), name)

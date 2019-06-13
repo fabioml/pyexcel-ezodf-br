@@ -50,7 +50,7 @@ class OfficeDocumentMeta(XMLMixin):
 
     def _setup(self):
         self.meta = self.xmlnode.find(CN('office:meta'))
-        if self.meta is None: # this is a new document
+        if self.meta is None:  # this is a new document
             self.meta = subelement(self.xmlnode, CN('office:meta'))
             self.xmlnode.set(CN('grddl:transformation'), "http://docs.oasis-open.org/office/1.2/xslt/odf2rdf.xsl")
             self['creation-date'] = datetime.now().isoformat()
@@ -66,7 +66,7 @@ class OfficeDocumentMeta(XMLMixin):
         self['generator'] = OfficeDocumentMeta.generator
 
     def __setitem__(self, key, value):
-        cnkey = CN(TAGS[key]) # key in clark notation
+        cnkey = CN(TAGS[key])  # key in clark notation
         element = subelement(self.meta, cnkey)
         element.text = value
 
@@ -87,6 +87,7 @@ class OfficeDocumentMeta(XMLMixin):
         except KeyError:
             count = 1
         self['editing-cycles'] = tostr(count)
+
 
 class Keywords(object):
     def __init__(self, meta):

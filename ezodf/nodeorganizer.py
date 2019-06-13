@@ -7,6 +7,7 @@
 from __future__ import unicode_literals, print_function, division
 __author__ = "mozman <mozman@gmx.at>"
 
+
 class PreludeEpilogueOrganizer(object):
     """ Reorganizes children order of an XMLNode.
 
@@ -135,6 +136,7 @@ class PreludeTagBlock(object):
             return self._count_tags_in_block()
         else:
             return self.insert_position_before(self._successor_tag(tag))
+
 
 class EpilogueTagBlock(PreludeTagBlock):
     def __init__(self, xmlnode, tags):

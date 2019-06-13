@@ -139,21 +139,22 @@ class _BaseDocument(object):
         style = fake_element(stylexmlstr)
         self.styles.styles.xmlnode.append(style.xmlnode)
 
+
 class FlatXMLDocument(_BaseDocument):
     """ OpenDocument contained in a single XML file. """
     TAG = CN('office:document')
 
     def __init__(self, filetype='odt', filename=None, xmlnode=None):
         super(FlatXMLDocument, self).__init__()
-        self.docname=filename
+        self.docname = filename
         self.mimetype = MIMETYPES[filetype]
         self.doctype = filetype
 
-        if xmlnode is None: # new document
+        if xmlnode is None:  # new document
             self.xmlnode = etree.Element(self.TAG, nsmap=ALL_NSMAP)
         elif xmlnode.tag == self.TAG:
             self.xmlnode = xmlnode
-            self.mimetype = xmlnode.get(CN('office:mimetype')) # required
+            self.mimetype = xmlnode.get(CN('office:mimetype'))  # required
         else:
             raise ValueError("Unexpected root tag: %s" % self.xmlnode.tag)
 
@@ -162,7 +163,6 @@ class FlatXMLDocument(_BaseDocument):
 
         self._setup()
         self._create_shortcuts(self.body)
-
 
     def _setup(self):
         self.meta = OfficeDocumentMeta(subelement(self.xmlnode, CN('office:document-meta')))
@@ -201,6 +201,7 @@ class FlatXMLDocument(_BaseDocument):
         return etree.tostring(self.xmlnode,
                               xml_declaration=True,
                               encoding='UTF-8')
+
 
 class PackagedDocument(_BaseDocument):
     """ OpenDocument as package in a zipfile.

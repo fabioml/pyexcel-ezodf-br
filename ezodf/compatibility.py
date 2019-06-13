@@ -20,9 +20,10 @@ if PY3:
     # distiguish StringIO
     from io import BytesIO as StringIO
 
-    itermap=map
-    is_zipfile=zipfile.is_zipfile
+    itermap = map
+    is_zipfile = zipfile.is_zipfile
     tostr = str
+
     def is_string(value):
         return isinstance(value, str)
 
@@ -40,14 +41,14 @@ if PY3:
     def bytes2unicode(bytes):
         return str(bytes, 'utf-8')
 
-
-else: # PY2
+else:  # PY2
     # distiguish StringIO
     from cStringIO import StringIO
     from cStringIO import InputType, OutputType
     from StringIO import StringIO as SlowStringIO
 
-    tostr=unicode
+    tostr = unicode
+
     def is_string(value):
         # TODO: ??? shouldn't be an instance of 'unicode' ???
         return isinstance(value, basestring)

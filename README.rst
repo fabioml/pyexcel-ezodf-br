@@ -13,6 +13,8 @@ EzODF.py maintained by pyexcel
 .. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :target: https://gitter.im/pyexcel/Lobby
 
+.. highlight:: python
+
 Maintenance
 =============
 
