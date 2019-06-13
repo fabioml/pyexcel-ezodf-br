@@ -76,4 +76,3 @@ class CellSpanController(object):
         cell = self._get_cell(pos)
         cell._del_span_attributes()
         self._uncover_cell(pos)
-

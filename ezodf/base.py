@@ -10,8 +10,10 @@ __author__ = "mozman <mozman@gmx.at>"
 from .xmlns import etree, register_class, wrap
 from .compatibility import itermap, tostr
 
+
 def safelen(text):
     return len(text) if text else 0
+
 
 @register_class
 class GenericWrapper(object):
@@ -32,6 +34,7 @@ class GenericWrapper(object):
     @property
     def text(self):
         return self.xmlnode.text
+
     @text.setter
     def text(self, value):
         self.xmlnode.text = value
@@ -39,6 +42,7 @@ class GenericWrapper(object):
     @property
     def tail(self):
         return self.xmlnode.tail
+
     @tail.setter
     def tail(self, value):
         self.xmlnode.tail = value

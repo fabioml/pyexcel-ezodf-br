@@ -31,6 +31,7 @@ TYPE_VALUE_MAP = {
 # cell-content.
 SUPPORTED_CELL_CONTENT = ("Paragraph", "Heading")
 
+
 @register_class
 class Cell(GenericWrapper):
     CELL_ONLY_ATTRIBS = (CN('table:number-rows-spanned'),
@@ -70,7 +71,7 @@ class Cell(GenericWrapper):
             return value
 
         t = self.value_type
-        if  t is None:
+        if t is None:
             result = None
         elif t == 'string':
             result = self.plaintext()
@@ -177,6 +178,7 @@ class Cell(GenericWrapper):
     @property
     def display_form(self):
         return self.plaintext()
+
     @display_form.setter
     def display_form(self, text):
         t = self.value_type
@@ -251,6 +253,7 @@ class Cell(GenericWrapper):
         for key in self.CELL_ONLY_ATTRIBS:
             if key in self.xmlnode.attrib:
                 del self.xmlnode.attrib[key]
+
 
 @register_class
 class CoveredCell(Cell):

@@ -12,6 +12,7 @@ from .const import MANIFEST_NSMAP
 
 IGNORE_LIST = frozenset(['META-INF/manifest.xml'])
 
+
 class Manifest(XMLMixin):
     def __init__(self, content=None):
         if content is None:

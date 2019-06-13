@@ -27,6 +27,7 @@ class GenericBody(GenericWrapper):
 @register_class
 class TextBody(GenericBody):
     TAG = CN('office:text')
+
     def __init__(self, xmlnode=None):
         super(TextBody, self).__init__(xmlnode=xmlnode)
         self._epilogue = EpilogueTagBlock(self.xmlnode, TEXT_EPILOGUE)
@@ -35,12 +36,14 @@ class TextBody(GenericBody):
         self.insert(self._epilogue.insert_position_before(), child)
         return child
 
+
 @register_class
 class SpreadsheetBody(GenericBody):
     TAG = CN('office:spreadsheet')
     def __init__(self, xmlnode=None):
         super(SpreadsheetBody, self).__init__(xmlnode=xmlnode)
         self.sheets = Sheets(self.xmlnode)
+
 
 @register_class
 class DrawingBody(GenericBody):
@@ -49,13 +52,16 @@ class DrawingBody(GenericBody):
         super(DrawingBody, self).__init__(xmlnode=xmlnode)
         self.pages = Pages(self.xmlnode)
 
+
 @register_class
 class PresentationBody(DrawingBody):
     TAG = CN('office:presentation')
 
+
 @register_class
 class ChartBody(GenericBody):
     TAG = CN('office:chart')
+
 
 @register_class
 class ImageBody(GenericBody):

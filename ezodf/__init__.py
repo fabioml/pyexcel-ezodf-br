@@ -39,6 +39,7 @@ from .variables import UserFieldSet, UserFieldGet
 
 Sheet = Table
 
+
 def ezlist(items, header="", style_name=""):
     """ Create a simple list.
 

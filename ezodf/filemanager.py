@@ -19,6 +19,7 @@ from .compatibility import is_stream, StringIO
 
 FNCHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
+
 class FileObject(object):
     __slots__ = ['element', 'media_type', 'zipinfo']
 
@@ -41,6 +42,7 @@ class FileObject(object):
     @property
     def filename(self):
         return self.zipinfo.filename
+
 
 class FileManager(object):
     def __init__(self, zipname=None):
@@ -183,6 +185,7 @@ class FileManager(object):
         buffer = iobuffer.getvalue()
         del iobuffer
         return buffer
+
 
 def check_zipfile_for_oasis_validity(filename, mimetype):
     """ Checks the zipfile structure and least necessary content, but not the
