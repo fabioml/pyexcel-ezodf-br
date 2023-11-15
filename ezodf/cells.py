@@ -163,7 +163,7 @@ class Cell(GenericWrapper):
 
     def _set_style_name(self, style_name):
         if style_name is not None:
-            self.set_attr(CN('table:style-name'), style_name)
+            self.style_name = style_name
 
     def _set_value_type(self, value_type):
         self.set_attr(CN('office:value-type'), value_type)
