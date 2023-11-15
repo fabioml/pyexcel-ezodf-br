@@ -70,14 +70,11 @@ class Container(object):
 class OfficeFontFaceDecls(Container):
     TAG = CN('office:font-face-decls')
 
+    
 @register_class
 class OfficeStyles(Container):
     TAG = CN('office:styles')
-
-@register_class
-class OfficeAutomaticStyles(Container):
-    TAG = CN('office:automatic-styles')
-
+        
 @register_class
 class OfficeMasterStyles(Container):
     TAG = CN('office:master-styles')
@@ -85,7 +82,7 @@ class OfficeMasterStyles(Container):
 ## style objects
 
 
-class BaseStyle:
+class BaseStyle(GenericWrapper):
     ATTRIBUTEMAP = {}
 
     def __init__(self, xmlnode):
@@ -93,10 +90,10 @@ class BaseStyle:
 
     def __getitem__(self, key):
         """ Get style attribute 'key'. """
-        return self.xmlnode.get(self.ATTRIBUTEMAP[key])
+        return self.get_attr(self.ATTRIBUTEMAP[key])
 
     def __setitem__(self, key, value):
-        """ Set style attribute 'key' to 'value'. """
+        self.set_attr(self.ATTRIBUTEMAP[key], value)
 
     def _properties(self, key, property_factory, new=True):
         """ Get or create a properties element. """
@@ -108,7 +105,7 @@ class BaseStyle:
         if properties is None:
             properties = etree.SubElement(element, propertiesname)
         return property_factory(properties)
-
+        
 class Properties(BaseStyle):
     ATTRIBUTEMAP = {} # should contain all possible property names
     pass
@@ -131,7 +128,7 @@ class Style(BaseStyle):
         'class': CN('style:class'),
         'default-outline-level': CN('style:default-outline-level'),
     }
-
+    
 @register_class
 class DefaultStyle(BaseStyle):
     TAG = CN('style:default-style')
@@ -156,3 +153,123 @@ class FontFace(BaseStyle):
     TAG = CN('style:font-face')
 
 
+@register_class
+class NumberNumber(BaseStyle):
+    TAG = CN('number:number')
+    ATTRIBUTEMAP = {
+        'decimal-places': CN('number:decimal-places'),
+        'min-decimal-places': CN('number:min-decimal-places'),
+        'min-integer-digits': CN('number:min-integer-digits'),
+        'grouping': CN('number:grouping'),
+    }
+
+@register_class
+class NumberText(BaseStyle):
+    TAG = CN('number:text')
+    def __init__(self, xmlnode=None):
+        super(NumberText, self).__init__(xmlnode=xmlnode)
+
+@register_class
+class NumberCurrencySymbol(BaseStyle):
+    TAG = CN('number:currency-symbol')
+    ATTRIBUTEMAP = {
+        'language': CN('number:language'),
+        'country': CN('number:country')
+    }
+    def __init__(self, xmlnode=None):
+        super(NumberCurrencySymbol, self).__init__(xmlnode=xmlnode)
+
+def subelementMoreThanOne(parent, tag, new=True):
+    """ always create SubElement `tag` in parent node. 
+    Similar to subelement from xmlns file
+    """
+    return etree.SubElement(parent, tag)
+
+@register_class
+class StyleTextProperties(BaseStyle):
+    TAG = CN('style:text-properties')    
+    ATTRIBUTEMAP = {
+        'color': CN('fo:color')
+    }
+@register_class
+class StyleMap(BaseStyle):
+    TAG = CN('style:map')    
+    ATTRIBUTEMAP = {
+        'condition': CN('style:condition'),
+        'apply-style-name': CN('style:apply-style-name'),
+    }   
+
+@register_class
+class NumberCurrencyStyle(BaseStyle):
+    TAG = CN('number:currency-style')
+    
+    ATTRIBUTEMAP = {
+        'name': CN('style:name')
+    }
+    def __init__(self, xmlnode=None):
+        super(NumberCurrencyStyle, self).__init__(xmlnode=xmlnode)
+    def positive(self, name):
+        self['name']=name
+        self.symbol = wrap(subelementMoreThanOne(self.xmlnode, CN('number:currency-symbol')))
+        self.symbol['language']= 'pt'
+        self.symbol['country']= 'BR'
+        self.symbol.text = "R$"
+        self.ntext2 = wrap(subelementMoreThanOne(self.xmlnode, CN('number:text')))
+        self.ntext2.text = " "
+        self.n1 = wrap(subelementMoreThanOne(self.xmlnode, CN('number:number')))
+        self.n1['decimal-places']='2'
+        self.n1['min-decimal-places']='2'
+        self.n1['min-integer-digits']='1'
+        self.n1['grouping']='true'        
+    def negative(self, name, positiveName):
+        self.ntextColor = wrap(subelementMoreThanOne(self.xmlnode, CN('style:text-properties')))
+        self.ntextColor['color']='#ff0000'
+        self.ntextNeg = wrap(subelementMoreThanOne(self.xmlnode, CN('number:text')))
+        self.ntextNeg.text = "-"
+        self.positive(name)
+        self.conditionMap = wrap(subelementMoreThanOne(self.xmlnode, CN('style:map')))
+        self.conditionMap['condition']='value()>=0'
+        self.conditionMap['apply-style-name']=positiveName
+        
+        
+@register_class
+class NumberStyle(BaseStyle):
+    TAG = CN('number:number-style')
+    
+    ATTRIBUTEMAP = {
+        'name': CN('style:name')
+    }
+    def __init__(self, xmlnode=None):
+        super(NumberStyle, self).__init__(xmlnode=xmlnode)
+        self.n1 = wrap(subelement(self.xmlnode, CN('number:number')))
+        self.n1['decimal-places']='2'
+        self.n1['min-decimal-places']='2'
+        self.n1['min-integer-digits']='1'
+            
+        
+@register_class
+class OfficeAutomaticStyles(GenericWrapper):
+    TAG = CN('office:automatic-styles')
+    def __init__(self, xmlnode=None):
+        super(OfficeAutomaticStyles, self).__init__(xmlnode=xmlnode)
+    def default_content(self):
+        self.floatStyleNumber = wrap(subelementMoreThanOne(self.xmlnode, CN('number:number-style')))
+        self.floatStyleNumber['name']='floatStyle'
+        self.floatStyleStyle = wrap(subelementMoreThanOne(self.xmlnode, CN('style:style')))
+        self.floatStyleStyle['name']='floatStyle'
+        self.fillDefaultStyle(self.floatStyleStyle, self.floatStyleNumber['name'])
+        
+        etree.Element(self.TAG, nsmap=STYLES_NSMAP)
+        
+        self.currencyStyleNumberPositive = wrap(subelementMoreThanOne(self.xmlnode, CN('number:currency-style')))
+        self.currencyStyleNumberPositive.positive('currencyStylePositive')
+        self.currencyStyleNumberNegative = wrap(subelementMoreThanOne(self.xmlnode, CN('number:currency-style')))
+        self.currencyStyleNumberNegative.negative('currencyStyle','currencyStylePositive')
+        self.currencyStyleStyle = wrap(subelementMoreThanOne(self.xmlnode, CN('style:style'), True))
+        self.currencyStyleStyle['name']='currencyStyle'
+        self.fillDefaultStyle(self.currencyStyleStyle, self.currencyStyleNumberNegative['name'])
+        
+    def fillDefaultStyle(self, styleElem, associateName):
+        styleElem['parent-style-name']='Default'
+        styleElem['family']='table-cell'
+        styleElem['data-style-name']=associateName

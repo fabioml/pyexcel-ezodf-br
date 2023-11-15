@@ -27,6 +27,10 @@ TYPE_VALUE_MAP = {
     'boolean': CN('office:boolean-value'),
 }
 
+STYLE_VALUE_MAP = {
+    'float': 'floatStyle',
+    'currency': 'currencyStyle',
+}
 # These Classes are supported to read their plaintext content from the
 # cell-content.
 SUPPORTED_CELL_CONTENT = ("Paragraph", "Heading")
@@ -151,10 +155,15 @@ class Cell(GenericWrapper):
             self.append(value)
         else:
             self.set_attr(TYPE_VALUE_MAP[value_type], value)
+            self._set_style_name(STYLE_VALUE_MAP.get(value_type))
         self._set_value_type(value_type)
 
         if currency and (value_type == 'currency'):
             self.set_attr(CN('office:currency'), currency)
+
+    def _set_style_name(self, style_name):
+        if style_name is not None:
+            self.set_attr(CN('table:style-name'), style_name)
 
     def _set_value_type(self, value_type):
         self.set_attr(CN('office:value-type'), value_type)

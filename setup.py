@@ -18,10 +18,10 @@ from setuptools import setup, find_packages, Command
 PY2 = sys.version_info[0] == 2
 PY26 = PY2 and sys.version_info[1] < 7
 
-NAME = 'pyexcel-ezodf'
-AUTHOR = 'Manfred Moitzi'
-VERSION = '0.3.4'
-EMAIL = 'mozman@gmx.at'
+NAME = 'pyexcel-ezodf-br'
+AUTHOR = 'Fabio Luna'
+VERSION = '0.3.4.1'
+EMAIL = 'fabio.luna@gmail.com'
 LICENSE = 'MIT'
 DESCRIPTION = (
     'A Python package to create/manipulate OpenDocumentFormat files' +

@@ -34,7 +34,9 @@ class OfficeDocumentContent(XMLMixin):
         self.fonts = wrap(subelement(self.xmlnode, CN('office:font-face-decls')))
         self.automatic_styles = wrap(subelement(self.xmlnode, CN('office:automatic-styles')))
         self.body = wrap(subelement(self.xmlnode, CN('office:body')))
-
+        wrap(subelement(self.xmlnode, CN('office:biba')))
+        self.automatic_styles.default_content()
+        
     def get_application_body(self, bodytag):
         # The office:body element is just frame element for the real document content:
         # office:text, office:spreadsheet, office:presentation, office:drawing
