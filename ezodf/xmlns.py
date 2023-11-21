@@ -19,6 +19,12 @@ def subelement(parent, tag, new=True):
         element = etree.SubElement(parent, tag)
     return element
 
+def subelementMoreThanOne(parent, tag, new=True):
+    """ always create SubElement `tag` in parent node. 
+    Similar to subelement from xmlns file
+    """
+    return etree.SubElement(parent, tag)
+
 class _XMLNamespaces(object):
     def __init__(self, namespaces):
         self.prefix2uri = {}

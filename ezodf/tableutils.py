@@ -5,6 +5,7 @@
 # Copyright (C) 2011, Manfred Moitzi
 # License: MIT license
 from __future__ import unicode_literals, print_function, division
+import math
 __author__ = "mozman <mozman@gmx.at>"
 
 import re
@@ -46,7 +47,24 @@ def address_to_index(address):
         return (int(row_name)-1, column_name_to_index(column_name))
     else:
         raise ValueError('Invalid cell address: %s' % address)
+    
+def index_to_address(index):
+    if not isinstance(index, tuple):
+        raise TypeError('Parameter must be tuple')
+    def column_index_to_address(colindex):
+        q = colindex
+        nums = []
+        while (True):
+            q, mod = divmod(q, 26)
+            nums.append(mod)
+            if q <= 0:
+                break
+        nums[0] =nums[0]+1 
+        return "".join(chr((ord('A')-1+a) ) for a in reversed(nums))
 
+    row_index, column_index = index
+    return "{}{}".format(column_index_to_address(column_index), int(row_index)+1)
+    
 def get_cell_index(reference):
     if isinstance(reference, tuple): # key => (row, column)
         return reference

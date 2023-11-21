@@ -27,7 +27,7 @@ DESCRIPTION = (
     'A Python package to create/manipulate OpenDocumentFormat files' +
     ''
 )
-URL = 'https://github.com/pyexcel/pyexcel-ezodf'
+URL = 'https://github.com/fabioml/pyexcel-ezodf-br'
 DOWNLOAD_URL = '%s/archive/0.3.4.tar.gz' % URL
 FILES = ['README.rst', 'CONTRIBUTORS.rst', 'CHANGELOG.rst']
 KEYWORDS = [

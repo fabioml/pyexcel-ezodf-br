@@ -5,6 +5,7 @@
 # Copyright (C) 2011, Manfred Moitzi
 # License: MIT license
 from __future__ import unicode_literals, print_function, division
+from ezodf.named import NamedExpressions
 __author__ = "mozman <mozman@gmx.at>"
 
 from .xmlns import register_class, CN, wrap, subelement
@@ -43,8 +44,14 @@ class SpreadsheetBody(GenericBody):
     def __init__(self, xmlnode=None):
         super(SpreadsheetBody, self).__init__(xmlnode=xmlnode)
         self.sheets = Sheets(self.xmlnode)
+        self._namedExpression = wrap(subelement(self.xmlnode, CN('table:named-expressions')))
 
-
+    def add_named(self, sheet, name, namedRange):
+        self._namedExpression.add_named(sheet, name, namedRange)
+        
+    def del_named(self, name):
+        self._namedExpression.del_named(name)
+        
 @register_class
 class DrawingBody(GenericBody):
     TAG = CN('office:drawing')

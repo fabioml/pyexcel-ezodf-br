@@ -5,6 +5,7 @@
 # Copyright (C) 2010, Manfred Moitzi
 # License: MIT license
 from __future__ import unicode_literals, print_function, division
+from ezodf.xmlns import subelementMoreThanOne
 __author__ = "mozman <mozman@gmx.at>"
 
 from .const import STYLES_NSMAP
@@ -178,12 +179,6 @@ class NumberCurrencySymbol(BaseStyle):
     }
     def __init__(self, xmlnode=None):
         super(NumberCurrencySymbol, self).__init__(xmlnode=xmlnode)
-
-def subelementMoreThanOne(parent, tag, new=True):
-    """ always create SubElement `tag` in parent node. 
-    Similar to subelement from xmlns file
-    """
-    return etree.SubElement(parent, tag)
 
 @register_class
 class StyleTextProperties(BaseStyle):
