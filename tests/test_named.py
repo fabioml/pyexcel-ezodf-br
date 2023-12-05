@@ -43,7 +43,10 @@ class Test(unittest.TestCase):
                                 encoding='UTF-8')
         self.assertEqual(expect, result,"\n{}\n{}".format(expect,result))
         
-
+    def test_load(self):
+        named = wrap(etree.XML(NAMEDSEXP1))
+        named.del_named("XXX")
+        
     def test_oneNamed(self):
         named = NamedExpressions()
         named.add_named("SHEET1", "XXX", "A2")

@@ -26,7 +26,6 @@ class NamedExpressions(GenericWrapper):
     
     def __init__(self, xmlnode=None):
         super(NamedExpressions, self).__init__(xmlnode=xmlnode)
-        self.ranges={}
     
     def add_named(self, sheet, name, namedRange):
         sheetName = sheet
@@ -39,17 +38,19 @@ class NamedExpressions(GenericWrapper):
             raise ValueError('Invalid cell address: %s' % namedRange)
         column_name, row_name = res.groups()
         namedRange="${}.${}${}".format(sheetName ,column_name, row_name)
-        if name in self.ranges:
-            self.xmlnode.remove(self.ranges[name].xmlnode)
-        self.ranges[name]=wrap(subelementMoreThanOne(self.xmlnode, CN('table:named-range')))
-        self.ranges[name].cellRangeAddress=namedRange
-        self.ranges[name].baseCellAddress=namedRange
-        self.ranges[name].tableName = name
+        self.del_named(name, False)
+        namedCreated =wrap(subelementMoreThanOne(self.xmlnode, CN('table:named-range')))
+        namedCreated.cellRangeAddress=namedRange
+        namedCreated.baseCellAddress=namedRange
+        namedCreated.tableName = name
     
-    def del_named(self, name):
-        if name in self.ranges:
-            self.xmlnode.remove(self.ranges[name].xmlnode)
-        else:
+    def del_named(self, name, exceptionNotFound = True):
+        for n in  self.xmlnode.findall(NamedRange.TAG):
+            w = wrap(n)
+            if w.tableName == name:
+                self.xmlnode.remove(n)
+                return
+        if exceptionNotFound:
             raise KeyError('Unable to find: %s' % name) 
         
     
